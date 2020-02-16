@@ -9,25 +9,21 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (CMAKE_HOST_WIN32)
-    set(WIN32 1)
-elseif (CMAKE_HOST_APPLE)
-    set(APPLE 1)
-elseif (CMAKE_HOST_UNIX)
-    set(UNIX 1)
-endif ()
+if (UNIX AND NOT APPLE)
+    set(LINUX 1)
+endif (UNIX AND NOT APPLE)
 
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
 
-if (APPLE)
-	SET(LIBRARY_OUTPUT_PATH /usr/local/lib)
-elseif (WIN32)
-	SET(LIBRARY_OUTPUT_PATH D:/Local/libs/lib)
-elseif(UNIX)
-	SET(LIBRARY_OUTPUT_PATH /usr/local/ v lib)
-endif ()
 
+if (UNIX)
+    SET(LIBRARY_OUTPUT_PATH /usr/local/lib)
+endif (UNIX)
+
+if (WIN32)
+	SET(LIBRARY_OUTPUT_PATH D:/Local/libs/lib)
+endif ()
 
 # SHARED
 # STATIC
