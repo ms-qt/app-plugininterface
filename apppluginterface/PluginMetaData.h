@@ -12,8 +12,6 @@
 
 class PluginMetaData : public QObject
 {
-
-
 private:
     QString *data;
     QObject *object;

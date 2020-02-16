@@ -12,7 +12,6 @@
 // 插件接口
 class IAppPluginInterface : public QObject
 {
-
 public :
 
     virtual ~IAppPluginInterface()
@@ -29,7 +28,6 @@ public :
 };
 
 #endif // IAPPPLUGININTERFACE_H
-
 
 #define IAppPluginInterface_iid "App.Plugin.Interface"
 
