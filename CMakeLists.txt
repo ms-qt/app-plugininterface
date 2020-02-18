@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(app-plugininterface LANGUAGES CXX)
+project(AppPluginInterface LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -34,9 +34,10 @@ add_library(${PROJECT_NAME} STATIC
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
 
-target_compile_definitions(${PROJECT_NAME} PRIVATE IAPPPLUGININTERFACE_LIBRARY)
+target_compile_definitions(${PROJECT_NAME} PRIVATE APPPLUGININTERFACE_LIBRARY)
 
 
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib)
 install(DIRECTORY apppluginterface DESTINATION include FILES_MATCHING PATTERN "*.h")
-install(EXPORT ${PROJECT_NAME} NAMESPACE ${PROJECT_NAME}:: DESTINATION lib/cmake/appplugininterface)
+install(EXPORT ${PROJECT_NAME} NAMESPACE DESTINATION lib/cmake/appplugininterface)
+#install(EXPORT ${PROJECT_NAME} NAMESPACE app:: DESTINATION lib/cmake/appplugininterface)
