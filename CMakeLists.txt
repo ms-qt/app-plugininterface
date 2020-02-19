@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(AppPluginInterface LANGUAGES CXX)
+project(PluginInterface LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -39,5 +39,5 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE APPPLUGININTERFACE_LIBRARY)
 
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib)
 install(DIRECTORY apppluginterface DESTINATION include FILES_MATCHING PATTERN "*.h")
-install(EXPORT ${PROJECT_NAME} NAMESPACE DESTINATION lib/cmake/appplugininterface)
+install(EXPORT ${PROJECT_NAME} NAMESPACE bdlbsc DESTINATION lib/cmake/appplugininterface)
 #install(EXPORT ${PROJECT_NAME} NAMESPACE app:: DESTINATION lib/cmake/appplugininterface)
