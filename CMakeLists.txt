@@ -28,7 +28,7 @@ set(SRC
         apppluginterface/IAppPluginInterface.h
         apppluginterface/PluginMetaData.cpp
         apppluginterface/PluginMetaData.h
-        )
+        apppluginterface/PLUGIN_INFO_KEY.h)
 
 
 # SHARED
