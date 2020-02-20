@@ -12,21 +12,16 @@
 
 class PluginMetaData : public QObject
 {
+    Q_OBJECT
 private:
     QString *data;
     QObject *object;
-
 public:
     PluginMetaData();
-
     QString *getData() const;
-
     void setData(QString *data);
-
     QObject *getObject() const;
-
     void setObject(QObject *object);
 };
-
 
 #endif //IAPPPLUGININTERFACE_PLUGINMETADATA_H

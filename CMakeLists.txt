@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(PluginInterface LANGUAGES CXX)
+project(plugininterface LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -13,31 +13,34 @@ if (UNIX AND NOT APPLE)
     set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-
 find_package(Qt5 COMPONENTS Core REQUIRED)
-
 
 if (UNIX)
     SET(LIBRARY_OUTPUT_PATH /usr/local/lib)
 endif (UNIX)
 
 if (WIN32)
-	SET(LIBRARY_OUTPUT_PATH D:/Local/libs/lib)
+    SET(LIBRARY_OUTPUT_PATH D:/Local/libs/lib)
 endif ()
+
+
+set(SRC
+        apppluginterface/IAppPluginInterface.h
+        apppluginterface/PluginMetaData.cpp
+        apppluginterface/PluginMetaData.h
+        )
+
 
 # SHARED
 # STATIC
 add_library(${PROJECT_NAME} STATIC
-        apppluginterface/IAppPluginInterface.h
-        apppluginterface/PluginMetaData.cpp
-        apppluginterface/PluginMetaData.h)
+        ${SRC}
+        )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE APPPLUGININTERFACE_LIBRARY)
 
-
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib)
 install(DIRECTORY apppluginterface DESTINATION include FILES_MATCHING PATTERN "*.h")
-install(EXPORT ${PROJECT_NAME} NAMESPACE bdlbsc DESTINATION lib/cmake/appplugininterface)
-#install(EXPORT ${PROJECT_NAME} NAMESPACE app:: DESTINATION lib/cmake/appplugininterface)
+install(EXPORT ${PROJECT_NAME} NAMESPACE app DESTINATION lib/cmake/appplugininterface)
