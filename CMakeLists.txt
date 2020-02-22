@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
-
-project(plugininterface LANGUAGES CXX)
+# 组织信息
+set(IDENTIFIER "bdlbsc")
+set(COPYRIGHT "Copyright © 2019-2020 bdlbsc")
+# 项目名称 版本
+project(plugininterface VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -23,13 +26,11 @@ if (WIN32)
     SET(LIBRARY_OUTPUT_PATH D:/Local/libs/lib)
 endif ()
 
-
 set(SRC
         apppluginterface/IAppPluginInterface.h
         apppluginterface/PluginMetaData.cpp
         apppluginterface/PluginMetaData.h
         apppluginterface/PLUGIN_INFO_KEY.h)
-
 
 # SHARED
 # STATIC
@@ -38,9 +39,8 @@ add_library(${PROJECT_NAME} STATIC
         )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
-
 target_compile_definitions(${PROJECT_NAME} PRIVATE APPPLUGININTERFACE_LIBRARY)
 
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib)
 install(DIRECTORY apppluginterface DESTINATION include FILES_MATCHING PATTERN "*.h")
-install(EXPORT ${PROJECT_NAME} NAMESPACE app DESTINATION lib/cmake/appplugininterface)
+install(EXPORT ${PROJECT_NAME} NAMESPACE bdlbsc DESTINATION lib/cmake/appplugininterface)
