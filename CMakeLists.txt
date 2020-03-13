@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 set(IDENTIFIER "bdlbsc")
 set(COPYRIGHT "Copyright © 2019-2020 bdlbsc")
 # 项目名称 版本
-project(plugininterface VERSION 1.0.0 LANGUAGES CXX)
+project(plugin-supper VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
@@ -20,12 +20,28 @@ if (UNIX AND NOT APPLE)
     set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-
-
 # SHARED
 # STATIC
 set(LIB_TYPE STATIC)
 
+
+if (UNIX)
+    include_directories(/usr/local/dev/vcpkg/installed/x64-osx/include)
+    link_directories(/usr/local/dev/vcpkg/installed/x64-osx/share/lib)
+
+    include_directories(/usr/local/include)
+    link_directories(/usr/local/lib)
+endif (UNIX)
+
+if (WIN32)
+
+    include_directories(D:/Local/vcpkg/installed/x64-windows/include)
+    link_directories(D:/Local/vcpkg/installed/x64-windows/lib)
+
+    include_directories("D:/Local/libs/include")
+    link_directories("D:/Local/libs/lib")
+
+endif (WIN32)
 
 
 if (UNIX)
@@ -36,8 +52,6 @@ if (WIN32)
     SET(CMAKE_INSTALL_PREFIX D:/Local/libs)
 endif (WIN32)
 
-
-find_package(Qt5 COMPONENTS Core REQUIRED)
 if (UNIX)
     SET(LIBRARY_OUTPUT_PATH /usr/local/lib)
 endif (UNIX)
@@ -45,6 +59,13 @@ endif (UNIX)
 if (WIN32)
     SET(LIBRARY_OUTPUT_PATH D:/Local/libs/lib)
 endif ()
+
+
+find_package(Qt5
+        COMPONENTS
+        Core
+        REQUIRED)
+
 
 set(SRC
         bdlbsc/plugin/supper/IAppPluginInterface.h
@@ -61,6 +82,24 @@ add_library(${PROJECT_NAME} ${LIB_TYPE}
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
 target_compile_definitions(${PROJECT_NAME} PRIVATE APPPLUGININTERFACE_LIBRARY)
 
-install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib)
-install(DIRECTORY bdlbsc DESTINATION include FILES_MATCHING PATTERN "*.h")
-install(EXPORT ${PROJECT_NAME} NAMESPACE bdlbsc DESTINATION lib/cmake/bdlbsc/plugin/supper/plugin-interface)
+install(TARGETS ${PROJECT_NAME}
+        EXPORT ${PROJECT_NAME}
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
+        ARCHIVE DESTINATION lib)
+
+configure_file(cmake/Config.cmake.in ${PROJECT_NAME}Config.cmake @ONLY)
+
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+        DESTINATION D:/Local/libs/lib/cmake/bdlbsc/plugin/supper)
+
+
+install(EXPORT ${PROJECT_NAME}
+        NAMESPACE bdlbsc
+        DESTINATION D:/Local/libs/lib/cmake/bdlbsc/plugin/supper)
+
+
+#install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib)
+#install(DIRECTORY bdlbsc DESTINATION include FILES_MATCHING PATTERN "*.h")
+#install(EXPORT ${PROJECT_NAME} NAMESPACE bdlbsc DESTINATION lib/cmake/bdlbsc/plugin/supper/plugin-interface)
