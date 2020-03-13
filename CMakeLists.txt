@@ -82,24 +82,41 @@ add_library(${PROJECT_NAME} ${LIB_TYPE}
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core)
 target_compile_definitions(${PROJECT_NAME} PRIVATE APPPLUGININTERFACE_LIBRARY)
 
+
+# 如果没有指定安装路径，就安装到当前目录
+if (NOT CMAKE_INSTALL_BINDIR)
+    set(CMAKE_INSTALL_BINDIR ".")
+endif ()
+
+
 install(TARGETS ${PROJECT_NAME}
         EXPORT ${PROJECT_NAME}
         LIBRARY DESTINATION lib
         RUNTIME DESTINATION bin
         ARCHIVE DESTINATION lib)
 
+install(DIRECTORY bdlbsc DESTINATION include FILES_MATCHING PATTERN "*.h")
+
 configure_file(cmake/Config.cmake.in ${PROJECT_NAME}Config.cmake @ONLY)
 
+if (WIN32)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
-        DESTINATION D:/Local/libs/lib/cmake/bdlbsc/plugin/supper)
-
-
-install(EXPORT ${PROJECT_NAME}
-        NAMESPACE bdlbsc
-        DESTINATION D:/Local/libs/lib/cmake/bdlbsc/plugin/supper)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+            DESTINATION D:/Local/libs/lib/cmake/bdlbsc/plugin/supper)
 
 
-#install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME} DESTINATION lib)
-#install(DIRECTORY bdlbsc DESTINATION include FILES_MATCHING PATTERN "*.h")
-#install(EXPORT ${PROJECT_NAME} NAMESPACE bdlbsc DESTINATION lib/cmake/bdlbsc/plugin/supper/plugin-interface)
+    install(EXPORT ${PROJECT_NAME}
+            NAMESPACE bdlbsc
+            DESTINATION D:/Local/libs/lib/cmake/bdlbsc/plugin/supper)
+
+endif (WIN32)
+
+
+if (UNIX)
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+            DESTINATION /usr/local/lib/cmake/bdlbsc/plugin/supper)
+
+    install(EXPORT ${PROJECT_NAME}
+            NAMESPACE bdlbsc
+            DESTINATION /usr/local/lib/cmake/bdlbsc/plugin/supper)
+endif (UNIX)
