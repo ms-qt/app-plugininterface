@@ -1,16 +1,58 @@
 ﻿{
-  // 请参阅 https://go.microsoft.com//fwlink//?linkid=834763 了解有关此文件的详细信息。
   "configurations": [
     {
       "name": "x64-Release",
-      "generator": "Ninja",
+      "generator": "Visual Studio 16 2019 Win64",
       "configurationType": "Release",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
-      "buildRoot": "${projectDir}\\out\\build\\${name}",
-      "installRoot": "D:\\Local\\libs",
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ],
+      "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\build\\${name}",
+      "installRoot": "D:/Local/libs",
       "cmakeCommandArgs": "",
-      "buildCommandArgs": "-v",
-      "ctestCommandArgs": ""
+      "variables": [
+        {
+          "name": "Qt5Core_DIR",
+          "value": "D:/Local/Qt/5.14.1/msvc2017_64/lib/cmake/Qt5Core",
+          "type": "FILEPATH"
+        },
+        {
+          "name": "Qt5Gui_DIR",
+          "value": "D:/Local/Qt/5.14.1/msvc2017_64/lib/cmake/Qt5Gui",
+          "type": "FILEPATH"
+
+        },
+        {
+          "name": " Qt5Network_DIR",
+          "value": "D:/Local/Qt/5.14.1/msvc2017_64/lib/cmake/Qt5Network",
+          "type": "FILEPATH"
+
+        },
+        {
+          "name": " Qt5QmlModels_DIR",
+          "value": "D:/Local/Qt/5.14.1/msvc2017_64/lib/cmakeQt5QmlModels",
+          "type": "FILEPATH"
+
+        },
+        {
+          "name": " Qt5Qml_DIR",
+          "value": "D:/Qt/Qt5.14.1/5.14.1/msvc2017_64/lib/cmake/Qt5Qml",
+          "type": "FILEPATH"
+
+        },
+        {
+          "name": " Qt5Quick_DIR",
+          "value": "D:/Qt/Qt5.14.1/5.14.1/msvc2017_64/lib/cmake/Qt5Quick",
+          "type": "FILEPATH"
+
+        },
+        {
+          "name": " Qt5_DIR",
+          "value": "D:/Local/Qt/5.14.1/msvc2017_64/lib/cmake/Qt5",
+          "type": "FILEPATH"
+
+        }
+      ]
     }
   ]
 }

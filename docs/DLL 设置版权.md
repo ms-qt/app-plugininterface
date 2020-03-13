@@ -1,0 +1,53 @@
+
+https://zhuanlan.zhihu.com/p/97512450
+
+
+## VersionInfo.rc.in
+
+    1 VERSIONINFO
+     FILEVERSION ${PROJECT_VERSION_MAJOR}, ${PROJECT_VERSION_MINOR}, ${PROJECT_VERSION_PATCH}
+     PRODUCTVERSION ${PROJECT_VERSION_MAJOR}, ${PROJECT_VERSION_MINOR}, ${PROJECT_VERSION_PATCH}
+     FILEFLAGSMASK 0x17L
+    #ifdef _DEBUG
+     FILEFLAGS 0x1L
+    #else
+     FILEFLAGS 0x0L
+    #endif
+     FILEOS 0x4L
+     FILETYPE 0x0L
+     FILESUBTYPE 0x0L
+    BEGIN
+        BLOCK "StringFileInfo"
+        BEGIN
+            BLOCK "040904b0"
+            BEGIN
+                VALUE "FileDescription", "MyLibrary Binary"
+                VALUE "FileVersion", "${PROJECT_VERSION_MAJOR}, ${PROJECT_VERSION_MINOR}, ${PROJECT_VERSION_PATCH}"
+                VALUE "InternalName", "MyLibrary"
+                VALUE "LegalCopyright", "Copyright (C) 2019"
+                VALUE "OriginalFilename", ""
+                VALUE "ProductName", "MyLibrary"
+                VALUE "ProductVersion", "${PROJECT_VERSION_MAJOR}, ${PROJECT_VERSION_MINOR}, ${PROJECT_VERSION_PATCH}"
+            END
+        END
+        BLOCK "VarFileInfo"
+        BEGIN
+            VALUE "Translation", 0x409, 1200
+        END
+    END
+
+
+## CMake
+
+
+if(MSVC)
+    set(MY_VERSIONINFO_RC "${CMAKE_BINARY_DIR}/VersionInfo.rc")
+    configure_file("${CMAKE_SOURCE_DIR}/VersionInfo.rc.in"
+                   "${MY_VERSIONINFO_RC }")
+endif()
+
+
+
+
+
+
