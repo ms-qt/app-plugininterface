@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 set(IDENTIFIER "bdlbsc")
 set(COPYRIGHT "Copyright © 2019-2020 bdlbsc")
 # 项目名称 版本
-project(plugin-supper VERSION 1.0.0 LANGUAGES CXX)
+project(bdlbsc-plugin-supper VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOUIC ON)
