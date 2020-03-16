@@ -1,2 +1,2 @@
-
-include("${CMAKE_CURRENT_LIST_DIR}/plugin-supper.cmake")
+message("北斗数睿插件接口配置:${CMAKE_CURRENT_LIST_DIR}/bdlbsc-plugin-supper.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/bdlbsc-plugin-supper.cmake")
